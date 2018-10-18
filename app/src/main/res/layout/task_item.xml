@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvTask"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/activity_taskitem_margin"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:focusable="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivTaskImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/activity_small_margin"
+            android:adjustViewBounds="false"
+            android:contentDescription="TASK"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/activity_small_margin"
+            android:layout_marginTop="@dimen/activity_small_margin"
+            android:layout_toEndOf="@+id/ivTaskImage"
+            android:maxLength="20"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            tools:text="Task desc" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginStart="@dimen/activity_small_margin"
+            android:layout_marginTop="@dimen/activity_small_margin"
+            android:layout_toEndOf="@+id/ivTaskImage"
+            android:maxLength="190"
+            tools:text="Task date" />
+
+        <TextView
+            android:id="@+id/tvOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDate"
+            android:layout_marginStart="@dimen/activity_small_margin"
+            android:layout_marginTop="@dimen/activity_small_margin"
+            android:layout_toEndOf="@+id/ivTaskImage"
+            android:maxLength="190"
+            tools:text="Task address" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/conn"
+        android:key="unit_preferences">
+        <EditTextPreference
+            android:key="client"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Enter client ID for AAD app"
+            android:title="Client id" />
+        <EditTextPreference
+            android:defaultValue="https://usnconeboxax1aos.cloud.onebox.dynamics.com"
+            android:key="axurl"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Enter url to dynamics 365 FO"
+            android:title="Dynamics URL" />
+        <EditTextPreference
+            android:defaultValue="00001"
+            android:key="worker"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Enter your worker id"
+            android:title="Worker" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

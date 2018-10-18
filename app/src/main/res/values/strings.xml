@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Dynamics365Test</string>
+    <string name="title_activity_tasks">TasksActivity</string>
+    <string name="title_activity_show_in_maps">Map</string>
+    <string name="settings">Settings</string>
+    <string name="refresh">Refresh</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="conn">Connections</string>
+    <string name="dynaurl">Dynamics 365 URL</string>
+    <string name="clear">Clear all</string>
+</resources>

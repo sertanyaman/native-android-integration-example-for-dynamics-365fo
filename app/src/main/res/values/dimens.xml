@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="activity_taskitem_margin">8dp</dimen>
+    <dimen name="activity_small_margin">5dp</dimen>
+</resources>
