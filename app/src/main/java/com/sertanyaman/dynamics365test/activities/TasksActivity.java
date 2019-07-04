@@ -13,13 +13,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.sertanyaman.dynamics365test.R;
 import com.sertanyaman.dynamics365test.comm.AzureAuthenticationHelper;
@@ -28,6 +28,10 @@ import com.sertanyaman.dynamics365test.database.TasksDBHelper;
 import com.sertanyaman.dynamics365test.models.Task;
 
 import java.util.List;
+
+import com.sertanyaman.dynamics365test.nothub.AzHubNotificationsHandler;
+import com.sertanyaman.dynamics365test.nothub.AzureHubsRegistrationHelper;
+
 
 public class TasksActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -39,11 +43,29 @@ public class TasksActivity extends AppCompatActivity {
     private AzureAuthenticationHelper aadHelper = null;
     private AzureAuthenticationHelper.OnAuthorizationResult onAuthorizationResult;
     private D365ServiceHelper serviceHelper = null;
+    private AzureHubsRegistrationHelper hubsHelper = null;
     private ProgressBar progressBar;
     private boolean isProgress=false;
 
+    public static TasksActivity mainActivity;
+    public static Boolean isVisible = false;
+    private static final String TAG = "TasksActivity";
+
+
     private void snackIt(String snack) {
-        Snackbar.make(((Activity) TasksActivity.this).getCurrentFocus() , snack,Snackbar.LENGTH_LONG).show();
+        View view = ((Activity) TasksActivity.this).getCurrentFocus();
+        if(view!=null) {
+            Snackbar.make(view, snack, Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    public void toastNotify(final String notificationMessage) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(TasksActivity.this, notificationMessage, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -134,12 +156,21 @@ public class TasksActivity extends AppCompatActivity {
         });
 
         serviceHelper = D365ServiceHelper.getInstance();
+        hubsHelper = AzureHubsRegistrationHelper.getHelper();
 
         settingsHelper.setOnSettingChange(new SettingsHelper.OnSettingChange() {
             @Override
             public void settingChanged(String s) {
                 aadHelper.initializeFromSettings();
                 serviceHelper.initFromSettings();
+                hubsHelper.registerWithNotificationHubs(TasksActivity.this, true);
+            }
+        });
+
+        hubsHelper.setOnNewFirebaseTokenReceived(new AzureHubsRegistrationHelper.OnNewFirebaseTokenReceived() {
+            @Override
+            public void tokenReceived(String token) {
+                hubsHelper.registerWithNotificationHubs(TasksActivity.this);
             }
         });
 
@@ -165,6 +196,11 @@ public class TasksActivity extends AppCompatActivity {
                 refreshServer();
             }
         });
+
+        mainActivity = this;
+
+        hubsHelper.registerWithNotificationHubs(TasksActivity.this);
+        AzHubNotificationsHandler.createChannelAndHandleNotifications(getApplicationContext());
     }
 
     @Override
@@ -213,6 +249,25 @@ public class TasksActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         refreshList();
+        isVisible = true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isVisible = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isVisible = false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isVisible = false;
     }
 
     private void setProgressOn()
@@ -248,6 +303,9 @@ public class TasksActivity extends AppCompatActivity {
         recyclerView.getAdapter().notifyDataSetChanged();
         removeProgress();
     }
+
+
+
 
 
 }

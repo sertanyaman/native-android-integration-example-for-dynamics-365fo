@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="@string/conn"
-        android:key="unit_preferences">
-        <EditTextPreference
-            android:key="client"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:summary="Enter client ID for AAD app"
-            android:title="Client id" />
+        android:title="@string/azapp"
+        android:key="azure_preferences">
+    <EditTextPreference
+        android:key="client"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Enter client ID for AAD app"
+        android:title="Client id" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/axconn"
+        android:key="ax_preferences">
         <EditTextPreference
             android:defaultValue="https://usnconeboxax1aos.cloud.onebox.dynamics.com"
             android:key="axurl"
@@ -17,12 +21,28 @@
             android:summary="Enter url to dynamics 365 FO"
             android:title="Dynamics URL" />
         <EditTextPreference
-            android:defaultValue="00001"
+            android:defaultValue="0001"
             android:key="worker"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="Enter your worker id"
             android:title="Worker" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/aznothub"
+        android:key="hub_preferences">
+        <EditTextPreference
+            android:key="hubname"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Enter hub name of azure hub"
+            android:title="Hub name" />
+        <EditTextPreference
+            android:key="hublistenconstring"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Enter hub listener connection string"
+            android:title="HubListenConnectionString" />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -8,4 +8,7 @@
     <string name="conn">Connections</string>
     <string name="dynaurl">Dynamics 365 URL</string>
     <string name="clear">Clear all</string>
+    <string name="aznothub">Azure Notification hub</string>
+    <string name="axconn">AX Connection Settings</string>
+    <string name="azapp">Azure app registration</string>
 </resources>

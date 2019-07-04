@@ -7,8 +7,10 @@ public class SettingsHelper implements SharedPreferences.OnSharedPreferenceChang
     private static final String KEY_CLIENT= "client";
     private static final String KEY_AXURL = "axurl";
     private static final String KEY_WORKER = "worker";
+    private static final String KEY_HUBNAME = "hubname";
+    private static final String KEY_HUBLISTENCONSTRING = "hublistenconstring";
 
-    private String client, axUrl, worker;
+    private String client, axUrl, worker, hubname, hublistenconstring;
 
     //Settings change event
     public interface OnSettingChange
@@ -59,6 +61,22 @@ public class SettingsHelper implements SharedPreferences.OnSharedPreferenceChang
         this.worker = worker;
     }
 
+    public String getHubname() {
+        return hubname;
+    }
+
+    public void setHubname(String hubname) {
+        this.hubname = hubname;
+    }
+
+    public String getHublistenconstring() {
+        return hublistenconstring;
+    }
+
+    public void setHublistenconstring(String hublistenconstring) {
+        this.hublistenconstring = hublistenconstring;
+    }
+
     public void writeSettings(SharedPreferences  sharedPreferences)
     {
         SharedPreferences.Editor edit = sharedPreferences.edit();
@@ -66,6 +84,8 @@ public class SettingsHelper implements SharedPreferences.OnSharedPreferenceChang
         edit.putString(SettingsHelper.KEY_CLIENT,client);
         edit.putString(SettingsHelper.KEY_AXURL,axUrl);
         edit.putString(SettingsHelper.KEY_WORKER,worker);
+        edit.putString(SettingsHelper.KEY_HUBNAME,hubname);
+        edit.putString(SettingsHelper.KEY_HUBLISTENCONSTRING,hublistenconstring);
 
         edit.apply();
     }
@@ -78,6 +98,8 @@ public class SettingsHelper implements SharedPreferences.OnSharedPreferenceChang
             case SettingsHelper.KEY_CLIENT:
             case SettingsHelper.KEY_AXURL:
             case SettingsHelper.KEY_WORKER:
+            case SettingsHelper.KEY_HUBNAME:
+            case SettingsHelper.KEY_HUBLISTENCONSTRING:
                 this.loadFromSharedPreferences(sharedPreferences);
                 break;
         }
@@ -91,5 +113,7 @@ public class SettingsHelper implements SharedPreferences.OnSharedPreferenceChang
         client = sharedPreferences.getString(SettingsHelper.KEY_CLIENT, " ");
         axUrl = sharedPreferences.getString(SettingsHelper.KEY_AXURL, " ");
         worker = sharedPreferences.getString(SettingsHelper.KEY_WORKER, " ");
+        hubname = sharedPreferences.getString(SettingsHelper.KEY_HUBNAME, " ");
+        hublistenconstring = sharedPreferences.getString(SettingsHelper.KEY_HUBLISTENCONSTRING, " ");
       }
 }
